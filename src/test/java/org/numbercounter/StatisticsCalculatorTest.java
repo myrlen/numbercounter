@@ -1,19 +1,71 @@
 package org.numbercounter;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Assertions;
-
+import java.util.Arrays;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class StatisticsCalculatorTest {
   private final DataCapture dataCapture = new DataCapture();
 
-  @Test
-  void less()
+  @ParameterizedTest
+  @MethodSource("lessTestCases")
+  void less(final LessTestCase lessTestCase)
   {
-    StatisticsCalculator statisticsCalculator = dataCapture.build_stats();
-    assertEquals(statisticsCalculator.less(0), 0);
+    final StatisticsCalculator statisticsCalculator
+        = lessTestCase.dataCapture.build_stats();
+    assertEquals(
+        lessTestCase.expectedValue,
+        statisticsCalculator.less(lessTestCase.testValue),
+        lessTestCase.toString());
+  }
+
+  static Stream<LessTestCase> lessTestCases()
+  {
+    return Stream.of(
+        new LessTestCase("zero case")
+            .data(1, 2, 2, 3, 4, 5, 6)
+            .testValue(0)
+            .expectedValue(0),
+        new LessTestCase("all but one case")
+            .data(1, 2, 2, 3, 4, 5, 6)
+            .testValue(6)
+            .expectedValue(6)
+    );
+  }
+
+  private static class LessTestCase {
+    final DataCapture dataCapture = new DataCapture();
+    String description;
+    int testValue;
+    int expectedValue;
+
+    LessTestCase(final String description) {
+      this.description = description;
+    }
+
+    LessTestCase data(int ... data) {
+      Arrays.stream(data).forEach(dataCapture::add);
+      return this;
+    }
+
+    LessTestCase testValue(int testValue) {
+      this.testValue = testValue;
+      return this;
+    }
+
+    LessTestCase expectedValue(int expectedValue) {
+      this.expectedValue = expectedValue;
+      return this;
+    }
+
+    @Override
+    public String toString() {
+      return "LessTestCase{" + description + '}';
+    }
   }
 
   @Test
