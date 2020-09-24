@@ -14,7 +14,8 @@ test {
 }
 
 dependencies {
-    testImplementation group:'org.junit.jupiter', name:'junit-jupiter-api', version:'5.3.1'
-    testImplementation group:'org.junit.jupiter', name:'junit-jupiter-params', version:'5.3.1'
-    testRuntimeOnly group:'org.junit.jupiter', name:'junit-jupiter-engine', version:'5.3.1'
+    implementation group:'net.sourceforge.argparse4j', name: 'argparse4j', version: '0.8.1' //MIT license
+    testImplementation group:'org.junit.jupiter', name:'junit-jupiter-api', version:'5.3.1' //Eclipse license
+    testImplementation group:'org.junit.jupiter', name:'junit-jupiter-params', version:'5.3.1' //Eclipse license
+    testRuntimeOnly group:'org.junit.jupiter', name:'junit-jupiter-engine', version:'5.3.1' //Eclipse license
 }
