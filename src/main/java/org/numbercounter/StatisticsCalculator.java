@@ -1,6 +1,5 @@
 package org.numbercounter;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
@@ -11,18 +10,11 @@ public class StatisticsCalculator {
   private final NavigableMap<Integer, Long> greaterStatistics = new TreeMap<>();
   private final long totalPointCount;
 
-  public StatisticsCalculator(final List<Integer> data) {
-     totalPointCount = data.size();
-    //This is O(n(log(m))) where
-    // n is the number of elements in the list, and
-    // m is the maximum number of *unique* elements in the list.
-    // The maximum number of unique elements in the list is 1000, which is a constant,
-    // therefore this is O(n(log(c))) -> O(n)
-    final NavigableMap<Integer, Long> pointCounts = new TreeMap<>();
-    data.forEach(dataPoint -> {
-      final Long pointCount = pointCounts.computeIfAbsent(dataPoint, x -> 0L)+1;
-      pointCounts.put(dataPoint, pointCount);
-    });
+  public StatisticsCalculator(
+      final NavigableMap<Integer, Long> pointCounts,
+      final long totalPointCount)
+  {
+    this.totalPointCount = totalPointCount;
 
     long counter = 0L;
     int criticalPointLess = -1;
