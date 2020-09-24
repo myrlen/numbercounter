@@ -111,6 +111,10 @@ class StatisticsCalculatorTest {
             .data(3, 9, 3, 4, 6)
             .testValue(4)
             .expectedValue(2),
+        new SingleInputTestCase(function, "Stephen's data with request of a point not in the set")
+            .data(3, 9, 3, 4, 6)
+            .testValue(8)
+            .expectedValue(4),
         new SingleInputTestCase(function, "zero case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(0)
@@ -147,7 +151,7 @@ class StatisticsCalculatorTest {
             .lowerValue(2)
             .upperValue(2)
             .expectedValue(2),
-        new BetweenTestCase("empty set  case")
+        new BetweenTestCase("empty set case")
             .data(3, 9, 3, 4, 6)
             .lowerValue(7)
             .upperValue(8)
@@ -190,6 +194,10 @@ class StatisticsCalculatorTest {
             .data(3, 9, 3, 4, 6)
             .testValue(4)
             .expectedValue(2),
+        new SingleInputTestCase(function, "Stephen's data with request of a point not in the set")
+            .data(3, 9, 3, 4, 6)
+            .testValue(7)
+            .expectedValue(1),
         new SingleInputTestCase(function, "all case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(0)
