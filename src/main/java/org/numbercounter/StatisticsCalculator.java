@@ -2,10 +2,12 @@ package org.numbercounter;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 public class StatisticsCalculator {
   private final TreeMap<Integer, Long> lessStatistics = new TreeMap<>();
+  private final TreeMap<Integer, Long> greaterStatistics = new TreeMap<>();
 
   public StatisticsCalculator(final List<Integer> data) {
     //This is O(n(log(m))) where
@@ -19,14 +21,18 @@ public class StatisticsCalculator {
       pointCounts.put(dataPoint, pointCount);
     });
 
-    long lessCounter = 0L;
-    int lastPoint = -2;
+    long counter = 0L;
+    int criticalPointLess = -1;
+    long totalCount = data.size();
     for (final Map.Entry<Integer, Long> pointEntry : pointCounts.entrySet()) {
-      lessStatistics.put(lastPoint+1, lessCounter); //+1 because its "less than but not including".
-      lessCounter += pointEntry.getValue();
-      lastPoint = pointEntry.getKey();
+      lessStatistics.put(criticalPointLess, counter);
+      criticalPointLess = pointEntry.getKey() + 1; //+1 because its "less than but not including".
+      int criticalPointMore = pointEntry.getKey() - 1;
+      greaterStatistics.put( criticalPointMore, totalCount - counter);
+
+      counter += pointEntry.getValue();
     }
-    lessStatistics.put(lastPoint+1, lessCounter);
+    lessStatistics.put(criticalPointLess, counter);
     //There will be one more entry than 'necessary' but it won't cause harm because it's a zero pair.
   }
 
@@ -41,8 +47,12 @@ public class StatisticsCalculator {
     return 0;
   }
 
-  int greater(int lower)
+  long greater(int lower)
   {
-    return 0;
+    final Entry<Integer, Long> ceilingEntry = greaterStatistics.ceilingEntry(lower);
+    if (ceilingEntry == null)
+      return 0; //The requested lower bound higher than the range of recorded values.
+    else
+      return ceilingEntry.getValue();
   }
 }

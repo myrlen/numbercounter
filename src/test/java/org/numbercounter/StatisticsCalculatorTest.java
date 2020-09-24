@@ -15,7 +15,7 @@ class StatisticsCalculatorTest {
     String function;
     String description;
     int testValue;
-    int expectedValue;
+    long expectedValue;
 
     SingleInputTestCase(final String function, final String description) {
       this.function = function;
@@ -32,7 +32,7 @@ class StatisticsCalculatorTest {
       return this;
     }
 
-    SingleInputTestCase expectedValue(int expectedValue) {
+    SingleInputTestCase expectedValue(long expectedValue) {
       this.expectedValue = expectedValue;
       return this;
     }
