@@ -21,11 +21,14 @@ public class StatisticsCalculatorMain {
         .defaultHelp(true)
         .description("calculate requested statistics on inputted numbers.");
     parser.addArgument("-i", "--" + INPUT_CSV_FILE)
-        .help("CSV File containing the data to calculate the results on");
+        .help("CSV File containing the data to calculate the results on")
+        .required(true);
     parser.addArgument("-r", "--" + REQUESTS_CSV_FILE)
-        .help("CSV File containing the requests for statistics to be calculated");
+        .help("CSV File containing the requests for statistics to be calculated")
+        .required(true);
     parser.addArgument("-o", "--" + OUTPUT_DIRECTORY)
-        .help("The directory to accept output of results");
+        .help("The directory to accept output of results")
+        .required(true);
 
     Namespace ns = null;
 
