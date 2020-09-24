@@ -5,6 +5,6 @@ public class DataCapture {
   }
 
   public StatisticsCalculator build_stats() {
-    return null;
+    return new StatisticsCalculator();
   }
 }
