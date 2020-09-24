@@ -1,5 +1,6 @@
 package org.numbercounter;
 
+import java.io.IOException;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
@@ -27,7 +28,16 @@ public class StatisticsCalculatorMain {
       System.exit(1);
     }
 
-    final String dataPathname = ns.getString("dataCSVFile");
+
+    final String dataPathname = ns.getString("inputCSVFile");
+    try {
+      final DataCapture dataCapture = new DataCapture();
+      CSVReader.readData(dataPathname, dataCapture);
+    } catch (final IOException e) {
+      System.err.println("The file '" + dataPathname + "' couldn't be read.");
+    }
+
+
     final String requestsPathname = ns.getString("requestsCSVFile");
     final String outputPathname = ns.getString("outputDirectory");
   }
