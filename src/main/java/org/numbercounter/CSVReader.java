@@ -3,6 +3,7 @@ package org.numbercounter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -40,7 +41,7 @@ public class CSVReader {
   public static void readRequests(
       final String requestsPathname,
       final StatisticsCalculator statisticsCalculator,
-      final AnswerCapture answerCapture) throws IOException, MissingNumberException {
+      final List<Answer> answerCapture) throws IOException, MissingNumberException {
     final File csvFileData = new File(requestsPathname);
     try (final FileReader csvFileReaderData = new FileReader(csvFileData)) {
       final CSVParser inputRecords = CSVFormat.EXCEL.withFirstRecordAsHeader().parse(csvFileReaderData);

@@ -1,6 +1,9 @@
 package org.numbercounter;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
@@ -44,7 +47,7 @@ public class StatisticsCalculatorMain {
 
 
     final String requestsPathname = ns.getString(REQUESTS_CSV_FILE);
-    final AnswerCapture answerCapture = new AnswerCapture();
+    final List<Answer> answerCapture = new LinkedList<>();
     try {
       final StatisticsCalculator statisticsCalculator = dataCapture.build_stats();
       CSVReader.readRequests(requestsPathname, statisticsCalculator, answerCapture);
@@ -53,6 +56,12 @@ public class StatisticsCalculatorMain {
     }
 
 
-    final String outputPathname = ns.getString(OUTPUT_DIRECTORY);
+    try {
+      final String outputPathname = ns.getString(OUTPUT_DIRECTORY);
+      final File csvFileTarget = CSVWriter.writeCSVFile(outputPathname, answerCapture);
+      System.out.println("PR list written to " + csvFileTarget);
+    } catch (final IOException e) {
+      System.err.println("The output file couldn't be written.");
+    }
   }
 }
