@@ -9,59 +9,28 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class StatisticsCalculatorTest {
-  private final DataCapture dataCapture = new DataCapture();
 
-  @ParameterizedTest
-  @MethodSource("lessTestCases")
-  void less(final LessTestCase lessTestCase)
-  {
-    final StatisticsCalculator statisticsCalculator
-        = lessTestCase.dataCapture.build_stats();
-    assertEquals(
-        lessTestCase.expectedValue,
-        statisticsCalculator.less(lessTestCase.testValue),
-        lessTestCase.toString());
-  }
-
-  static Stream<LessTestCase> lessTestCases()
-  {
-    return Stream.of(
-        new LessTestCase("Stephen's case")
-            .data(3, 9, 3, 4, 6)
-            .testValue(4)
-            .expectedValue(2),
-        new LessTestCase("zero case")
-            .data(1, 2, 2, 3, 4, 5, 6)
-            .testValue(0)
-            .expectedValue(0),
-        new LessTestCase("all but one case")
-            .data(1, 2, 2, 3, 4, 5, 6)
-            .testValue(6)
-            .expectedValue(6)
-    );
-  }
-
-  private static class LessTestCase {
+  private static class SingleInputTestCase {
     final DataCapture dataCapture = new DataCapture();
     String description;
     int testValue;
     int expectedValue;
 
-    LessTestCase(final String description) {
+    SingleInputTestCase(final String description) {
       this.description = description;
     }
 
-    LessTestCase data(int ... data) {
+    SingleInputTestCase data(int ... data) {
       Arrays.stream(data).forEach(dataCapture::add);
       return this;
     }
 
-    LessTestCase testValue(int testValue) {
+    SingleInputTestCase testValue(int testValue) {
       this.testValue = testValue;
       return this;
     }
 
-    LessTestCase expectedValue(int expectedValue) {
+    SingleInputTestCase expectedValue(int expectedValue) {
       this.expectedValue = expectedValue;
       return this;
     }
@@ -72,6 +41,38 @@ class StatisticsCalculatorTest {
     }
   }
 
+  private final DataCapture dataCapture = new DataCapture();
+
+  @ParameterizedTest
+  @MethodSource("lessTestCases")
+  void less(final SingleInputTestCase lessTestCase)
+  {
+    final StatisticsCalculator statisticsCalculator
+        = lessTestCase.dataCapture.build_stats();
+    assertEquals(
+        lessTestCase.expectedValue,
+        statisticsCalculator.less(lessTestCase.testValue),
+        lessTestCase.toString());
+  }
+
+  static Stream<SingleInputTestCase> lessTestCases()
+  {
+    return Stream.of(
+        new SingleInputTestCase("Stephen's case")
+            .data(3, 9, 3, 4, 6)
+            .testValue(4)
+            .expectedValue(2),
+        new SingleInputTestCase("zero case")
+            .data(1, 2, 2, 3, 4, 5, 6)
+            .testValue(0)
+            .expectedValue(0),
+        new SingleInputTestCase("all but one case")
+            .data(1, 2, 2, 3, 4, 5, 6)
+            .testValue(6)
+            .expectedValue(6)
+    );
+  }
+
   @Test
   void between()
   {
@@ -79,10 +80,34 @@ class StatisticsCalculatorTest {
     assertEquals(statisticsCalculator.between(0, 0), 0);
   }
 
-  @Test
-  void greater()
+  @ParameterizedTest
+  @MethodSource("greaterTestCases")
+  void greater(final SingleInputTestCase greaterTestCase)
   {
-    StatisticsCalculator statisticsCalculator = dataCapture.build_stats();
-    assertEquals(statisticsCalculator.greater(0), 0);
+    final StatisticsCalculator statisticsCalculator
+        = greaterTestCase.dataCapture.build_stats();
+    assertEquals(
+        greaterTestCase.expectedValue,
+        statisticsCalculator.greater(greaterTestCase.testValue),
+        greaterTestCase.toString());
+  }
+
+
+  static Stream<SingleInputTestCase> greaterTestCases()
+  {
+    return Stream.of(
+        new SingleInputTestCase("Stephen's case")
+            .data(3, 9, 3, 4, 6)
+            .testValue(4)
+            .expectedValue(2),
+        new SingleInputTestCase("all case")
+            .data(1, 2, 2, 3, 4, 5, 6)
+            .testValue(0)
+            .expectedValue(7),
+        new SingleInputTestCase("none case")
+            .data(1, 2, 2, 3, 4, 5, 6)
+            .testValue(6)
+            .expectedValue(0)
+    );
   }
 }
