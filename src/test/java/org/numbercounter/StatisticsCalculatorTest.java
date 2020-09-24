@@ -47,7 +47,7 @@ class StatisticsCalculatorTest {
       this.description = description;
     }
 
-    LessTestCase data(int ... data) {
+    LessTestCase data(long ... data) {
       Arrays.stream(data).forEach(dataCapture::add);
       return this;
     }
