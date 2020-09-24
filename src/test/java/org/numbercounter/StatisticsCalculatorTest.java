@@ -26,6 +26,10 @@ class StatisticsCalculatorTest {
   static Stream<LessTestCase> lessTestCases()
   {
     return Stream.of(
+        new LessTestCase("Stephen's case")
+            .data(3, 9, 3, 4, 6)
+            .testValue(4)
+            .expectedValue(2),
         new LessTestCase("zero case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(0)
@@ -47,7 +51,7 @@ class StatisticsCalculatorTest {
       this.description = description;
     }
 
-    LessTestCase data(long ... data) {
+    LessTestCase data(int ... data) {
       Arrays.stream(data).forEach(dataCapture::add);
       return this;
     }

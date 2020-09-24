@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DataCapture {
-  final List<Long> data = new LinkedList<Long>();
+  final List<Integer> data = new LinkedList<>();
 
-  public void add(long datapoint) {
+  public void add(int datapoint) {
     data.add(datapoint);
   }
 
