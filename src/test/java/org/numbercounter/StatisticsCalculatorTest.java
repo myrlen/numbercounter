@@ -12,11 +12,13 @@ class StatisticsCalculatorTest {
 
   private static class SingleInputTestCase {
     final DataCapture dataCapture = new DataCapture();
+    String function;
     String description;
     int testValue;
     int expectedValue;
 
-    SingleInputTestCase(final String description) {
+    SingleInputTestCase(final String function, final String description) {
+      this.function = function;
       this.description = description;
     }
 
@@ -37,7 +39,7 @@ class StatisticsCalculatorTest {
 
     @Override
     public String toString() {
-      return "LessTestCase{" + description + '}';
+      return function + "{'" + description + "'}";
     }
   }
 
@@ -57,16 +59,17 @@ class StatisticsCalculatorTest {
 
   static Stream<SingleInputTestCase> lessTestCases()
   {
+    final String function = "less";
     return Stream.of(
-        new SingleInputTestCase("Stephen's case")
+        new SingleInputTestCase(function, "Stephen's case")
             .data(3, 9, 3, 4, 6)
             .testValue(4)
             .expectedValue(2),
-        new SingleInputTestCase("zero case")
+        new SingleInputTestCase(function, "zero case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(0)
             .expectedValue(0),
-        new SingleInputTestCase("all but one case")
+        new SingleInputTestCase(function, "all but one case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(6)
             .expectedValue(6)
@@ -95,16 +98,17 @@ class StatisticsCalculatorTest {
 
   static Stream<SingleInputTestCase> greaterTestCases()
   {
+    final String function = "greater";
     return Stream.of(
-        new SingleInputTestCase("Stephen's case")
+        new SingleInputTestCase(function,"Stephen's case")
             .data(3, 9, 3, 4, 6)
             .testValue(4)
             .expectedValue(2),
-        new SingleInputTestCase("all case")
+        new SingleInputTestCase(function, "all case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(0)
             .expectedValue(7),
-        new SingleInputTestCase("none case")
+        new SingleInputTestCase(function, "none case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(6)
             .expectedValue(0)
