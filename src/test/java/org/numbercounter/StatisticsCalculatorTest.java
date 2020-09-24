@@ -9,10 +9,16 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class StatisticsCalculatorTest {
 
+  /**
+   * Helper class to create test cases for 'greater' and 'less' functions in the
+   * StatisticsCalculator class.
+   */
   private static class SingleInputTestCase {
-    final DataCapture dataCapture = new DataCapture();
+    //Adding a function name and description makes the output easier to read when a test fails.
     String function;
     String description;
+
+    final DataCapture dataCapture = new DataCapture();
     int testValue;
     long expectedValue;
 
@@ -42,9 +48,15 @@ class StatisticsCalculatorTest {
     }
   }
 
+  /**
+   * Helper class to create test cases for 'between' function in the
+   * StatisticsCalculator class.
+   */
   private static class BetweenTestCase {
-    final DataCapture dataCapture = new DataCapture();
+    //Adding a function name and description makes the output easier to read when a test fails.
     String description;
+
+    final DataCapture dataCapture = new DataCapture();
     int lowerValue;
     int upperValue;
     long expectedValue;

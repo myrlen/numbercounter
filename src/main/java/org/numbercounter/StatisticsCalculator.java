@@ -5,12 +5,15 @@ import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.TreeMap;
 
+/**
+ * Class to be used for calculating statistics on the data points collected by DataCapture.
+ */
 public class StatisticsCalculator {
   private final NavigableMap<Integer, Long> lessStatistics = new TreeMap<>();
   private final NavigableMap<Integer, Long> greaterStatistics = new TreeMap<>();
   private final long totalPointCount;
 
-  public StatisticsCalculator(
+  StatisticsCalculator(
       final NavigableMap<Integer, Long> pointCounts,
       final long totalPointCount)
   {
@@ -30,17 +33,37 @@ public class StatisticsCalculator {
     //There will be one more entry than 'necessary' but it won't cause harm because it's a zero pair.
   }
 
+  /**
+   * Returns the number of points below the given input value, excluding that value.
+   *
+   * @param upper count the number of points below this value.
+   * @return the number of points below upper
+   */
   long less(int upper)
   {
     final int floorKey = lessStatistics.floorKey(upper);
     return lessStatistics.get(floorKey);
   }
 
+  /**
+   * Returns the number of points between the given input values, including those values.
+   *
+   * @param lower count the number of points above this value.
+   * @param upper count the number of points above this value.
+   * @return the number of points between lower and upper including those values.
+   */
   long between(int lower, int upper)
   {
     return totalPointCount - (less(lower) + greater(upper));
   }
 
+
+  /**
+   * Returns the number of points above the given input value, excluding that value.
+   *
+   * @param lower count the number of points above this value.
+   * @return the number of points above lower
+   */
   long greater(int lower)
   {
     final Entry<Integer, Long> ceilingEntry = greaterStatistics.ceilingEntry(lower);
