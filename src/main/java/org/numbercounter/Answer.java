@@ -3,7 +3,7 @@ package org.numbercounter;
 import java.util.Optional;
 
 @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-public class Answer {
+class Answer {
 
   private final Operation operation;
   private final Optional<Integer> lower;

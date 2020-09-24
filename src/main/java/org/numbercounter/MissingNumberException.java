@@ -1,5 +1,5 @@
 package org.numbercounter;
 
-public class MissingNumberException extends RuntimeException {
+class MissingNumberException extends RuntimeException {
 
 }

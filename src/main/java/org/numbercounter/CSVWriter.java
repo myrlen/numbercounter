@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
-public class CSVWriter {
+class CSVWriter {
   private static final String OPERATION_COLUMN = "operation";
   private static final String LOWER_COLUMN = "lower";
   private static final String UPPER_COLUMN = "upper";

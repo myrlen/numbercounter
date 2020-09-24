@@ -1,6 +1,6 @@
 package org.numbercounter;
 
-public enum Operation {
+enum Operation {
   Less ("Less"),  //No PMC members or more.
   Between ("Between"), //1 PMC member.
   Greater ("Greater")

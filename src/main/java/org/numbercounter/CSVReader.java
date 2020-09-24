@@ -9,7 +9,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-public class CSVReader {
+class CSVReader {
   private static final String OPERATION_COLUMN = "operation";
   private static final String LOWER_COLUMN = "lower";
   private static final String UPPER_COLUMN = "upper";
@@ -28,7 +28,7 @@ public class CSVReader {
     }
   }
 
-  public static Optional<Integer> getOptionalInput(
+  static Optional<Integer> getOptionalInput(
       final CSVRecord record,
       final String columnName) {
     final String stringValue = record.get(columnName);
@@ -38,7 +38,7 @@ public class CSVReader {
       return Optional.of(Integer.parseInt(stringValue));
   }
 
-  public static void readRequests(
+  static void readRequests(
       final String requestsPathname,
       final StatisticsCalculator statisticsCalculator,
       final List<Answer> answerCapture) throws IOException, MissingNumberException {

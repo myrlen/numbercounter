@@ -31,7 +31,7 @@ public class StatisticsCalculator {
    * @param upper count the number of points below this value.
    * @return the number of points below upper
    */
-  long less(int upper)
+  public long less(int upper)
   {
     return totalPointCount - (greater(upper-1));
   }
@@ -43,7 +43,7 @@ public class StatisticsCalculator {
    * @param upper count the number of points above this value.
    * @return the number of points between lower and upper including those values.
    */
-  long between(int lower, int upper)
+  public long between(int lower, int upper)
   {
     return totalPointCount - (less(lower) + greater(upper));
   }
@@ -55,7 +55,7 @@ public class StatisticsCalculator {
    * @param lower count the number of points above this value.
    * @return the number of points above lower
    */
-  long greater(int lower)
+  public long greater(int lower)
   {
     final Entry<Integer, Long> ceilingEntry = pointCountStatistics.higherEntry(lower);
     if (ceilingEntry == null)
