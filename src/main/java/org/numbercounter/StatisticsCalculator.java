@@ -9,8 +9,10 @@ import java.util.TreeMap;
 public class StatisticsCalculator {
   private final NavigableMap<Integer, Long> lessStatistics = new TreeMap<>();
   private final NavigableMap<Integer, Long> greaterStatistics = new TreeMap<>();
+  private final long totalPointCount;
 
   public StatisticsCalculator(final List<Integer> data) {
+     totalPointCount = data.size();
     //This is O(n(log(m))) where
     // n is the number of elements in the list, and
     // m is the maximum number of *unique* elements in the list.
@@ -24,12 +26,11 @@ public class StatisticsCalculator {
 
     long counter = 0L;
     int criticalPointLess = -1;
-    long totalCount = data.size();
     for (final Map.Entry<Integer, Long> pointEntry : pointCounts.entrySet()) {
       lessStatistics.put(criticalPointLess, counter);
       criticalPointLess = pointEntry.getKey() + 1; //+1 because its "less than but not including".
       int criticalPointMore = pointEntry.getKey() - 1;
-      greaterStatistics.put( criticalPointMore, totalCount - counter);
+      greaterStatistics.put( criticalPointMore, totalPointCount - counter);
 
       counter += pointEntry.getValue();
     }
@@ -43,9 +44,9 @@ public class StatisticsCalculator {
     return lessStatistics.get(floorKey);
   }
 
-  int between(int lower, int upper)
+  long between(int lower, int upper)
   {
-    return 0;
+    return totalPointCount - (less(lower) + greater(upper));
   }
 
   long greater(int lower)
