@@ -3,11 +3,12 @@ package org.numbercounter;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.TreeMap;
 
 public class StatisticsCalculator {
-  private final TreeMap<Integer, Long> lessStatistics = new TreeMap<>();
-  private final TreeMap<Integer, Long> greaterStatistics = new TreeMap<>();
+  private final NavigableMap<Integer, Long> lessStatistics = new TreeMap<>();
+  private final NavigableMap<Integer, Long> greaterStatistics = new TreeMap<>();
 
   public StatisticsCalculator(final List<Integer> data) {
     //This is O(n(log(m))) where
@@ -15,7 +16,7 @@ public class StatisticsCalculator {
     // m is the maximum number of *unique* elements in the list.
     // The maximum number of unique elements in the list is 1000, which is a constant,
     // therefore this is O(n(log(c))) -> O(n)
-    final TreeMap<Integer, Long> pointCounts = new TreeMap<>();
+    final NavigableMap<Integer, Long> pointCounts = new TreeMap<>();
     data.forEach(dataPoint -> {
       final Long pointCount = pointCounts.computeIfAbsent(dataPoint, x -> 0L)+1;
       pointCounts.put(dataPoint, pointCount);
