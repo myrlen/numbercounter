@@ -1,4 +1,4 @@
-package org.numbercounter;
+package org.numbercounter.application;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
+import org.numbercounter.DataCapture;
+import org.numbercounter.StatisticsCalculator;
 
 public class StatisticsCalculatorMain {
 

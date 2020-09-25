@@ -1,4 +1,4 @@
-package org.numbercounter;
+package org.numbercounter.application;
 
 import java.io.File;
 import java.io.FileReader;
@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.numbercounter.DataCapture;
+import org.numbercounter.StatisticsCalculator;
 
 class CSVReader {
   private static final String OPERATION_COLUMN = "operation";

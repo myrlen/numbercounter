@@ -1,4 +1,4 @@
-package org.numbercounter;
+package org.numbercounter.application;
 
 import java.io.File;
 import java.io.FileWriter;

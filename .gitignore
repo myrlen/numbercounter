@@ -1,3 +1,4 @@
+component/build/**
 .gradle/**
 .idea/**
 build/**

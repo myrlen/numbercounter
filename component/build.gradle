@@ -1,14 +1,12 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.4.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
+    id 'maven-publish'
 }
 
 group 'org.numbercounter'
 version '1.0-SNAPSHOT'
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
@@ -17,10 +15,18 @@ test {
 }
 
 dependencies {
-    implementation group:'org.numbercounter', name:'component', version:'1.0-SNAPSHOT'
-    implementation group:'org.apache.commons', name: 'commons-csv', version: '1.8' //Apache license
-    implementation group:'net.sourceforge.argparse4j', name: 'argparse4j', version: '0.8.1' //MIT license
     testImplementation group:'org.junit.jupiter', name:'junit-jupiter-api', version:'5.3.1' //Eclipse license
     testImplementation group:'org.junit.jupiter', name:'junit-jupiter-params', version:'5.3.1' //Eclipse license
     testRuntimeOnly group:'org.junit.jupiter', name:'junit-jupiter-engine', version:'5.3.1' //Eclipse license
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'org.numbercounter'
+            artifactId = 'component'
+            version = '1.0-SNAPSHOT'
+            from components.java
+        }
+    }
 }

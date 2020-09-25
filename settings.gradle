@@ -1,2 +1,3 @@
 rootProject.name = 'numbercounter'
+include 'component'
 

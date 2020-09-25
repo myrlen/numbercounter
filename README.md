@@ -19,14 +19,14 @@ Using as a library
 ------------------
 Build locally using gradle:
 ```
-./gradlew build
+./gradlew build publishToMavenLocal
 ```
 
 Include in your project:
 ```xml
 <dependency>
   <groupId>org.numbercounter</groupId>
-  <artifactId>numbercounter</artifactId>
+  <artifactId>component</artifactId>
   <versionId>1.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -39,7 +39,7 @@ import org.numbercounter.StatisticsCalculator;
 class Example {
   public static void main(final String [] args)
   {
-    DataCapture capture = DataCapture();        
+    DataCapture capture = new DataCapture();        
     capture.add(3);
     capture.add(9);
     capture.add(3);

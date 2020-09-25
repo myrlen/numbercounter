@@ -1,4 +1,4 @@
-package org.numbercounter;
+package org.numbercounter.application;
 
 enum Operation {
   Less ("Less"),  //No PMC members or more.
