@@ -17,6 +17,7 @@ test {
 }
 
 dependencies {
+    compile project(':component')
     implementation group:'org.numbercounter', name:'component', version:'1.0-SNAPSHOT'
     implementation group:'org.apache.commons', name: 'commons-csv', version: '1.8' //Apache license
     implementation group:'net.sourceforge.argparse4j', name: 'argparse4j', version: '0.8.1' //MIT license
