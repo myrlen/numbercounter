@@ -119,6 +119,10 @@ class StatisticsCalculatorTest {
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(0)
             .expectedValue(0),
+        new SingleInputTestCase(function, "negative test value case")
+            .data(1, 2, 2, 3, 4, 5, 6)
+            .testValue(-10)
+            .expectedValue(0),
         new SingleInputTestCase(function, "all but one case")
             .data(1, 2, 2, 3, 4, 5, 6)
             .testValue(6)
